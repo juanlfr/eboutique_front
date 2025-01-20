@@ -3,6 +3,7 @@ import { map, Observable } from 'rxjs';
 import { Product } from '../common/product';
 import { HttpClient } from '@angular/common/http';
 import { ProductCategory } from '../common/product-category';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,24 +12,30 @@ export class ProductService {
 
 
 
-  private baseUrl = 'http://localhost:8080/api/products';
+  private baseUrl = environment.baseUrl;
 
-  private categoryUrl = 'http://localhost:8080/api/product-category';
+  private categoryUrl = environment.categoryUrl;
 
   constructor(private httpClient: HttpClient) { }
 
   getProductList(currentCategoryId: number): Observable<Product[]> {
     const searchUrl: string = `${this.baseUrl}/search/findByCategoryId?id=${currentCategoryId}`;
+    console.log(searchUrl);
     return this.getProducts(searchUrl);
   }
   getProductListPaginate(page: number, pageSize: number, currentCategoryId: number): Observable<GetResponseProducts> {
     const searchUrl: string = `${this.baseUrl}/search/findByCategoryId?id=${currentCategoryId}`
     + `&page=${page}&size=${pageSize}`;
+    console.log(searchUrl);
     return this.httpClient.get<GetResponseProducts>(searchUrl);
   }
   searchProducts(keyword: string): Observable<Product[]> {
     const searchUrl: string = `${this.baseUrl}/search/findByNameContaining?name=${keyword}`;
-    return this.getProducts(searchUrl)
+    return this.getProducts(searchUrl);
+  }
+  searchProductsByPrice(price: number): Observable<Product[]> {
+    const searchByPriceUrl: string = `${this.baseUrl}/search/findByUnitPriceLessThanEqual?price=${price}`;
+    return this.getProducts(searchByPriceUrl);
   }
   private getProducts(searchUrl: string): Observable<Product[]> {
     return this.httpClient.get<GetResponseProducts>(`${searchUrl}`).pipe(
