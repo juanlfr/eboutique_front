@@ -1,0 +1,17 @@
+.security-btn {
+    position: relative;
+    background: var(--bs-secondary);
+    color: var(--bs-white);
+    border: 10px;
+    min-width: 95px;
+    border-radius: 10%;
+}
+.member-btn {
+    position: relative;
+    margin: 10px;
+    background: gold;
+    color: gray;
+    border: 10px;
+    min-width: 95px;
+    border-radius: 10%;
+}
