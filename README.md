@@ -1,5 +1,9 @@
 # VeganBoutique
 
+Online shoping website to buy your vegan products:
+
+![imagen](https://github.com/user-attachments/assets/fcc58d24-ac45-4dfc-944f-372ee57d1646)
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.8.
 
 ## Development server
